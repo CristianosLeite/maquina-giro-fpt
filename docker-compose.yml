@@ -34,6 +34,9 @@ services:
       - '1880:1880'
     networks:
       - default
+    volumes:
+      - /home/conecsa/node_red_data:/data
+    user: root
 
   pgadmin:
     container_name: maquina-giro-pgadmin
