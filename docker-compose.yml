@@ -1,0 +1,53 @@
+services:
+  app1:
+    container_name: maquina-giro-api
+    restart: always
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+    ports:
+      - '4000:4000'
+    env_file:
+      - .env
+    networks:
+      - default
+    depends_on:
+      - node-red
+
+  app2:
+    container_name: maquina-giro-app
+    restart: always
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    ports:
+      - '4200:4200'
+    env_file:
+      - .env
+    networks:
+      - default
+
+  node-red:
+    container_name: maquina-giro-node-red
+    image: nodered/node-red:latest
+    ports:
+      - '1880:1880'
+    networks:
+      - default
+
+  pgadmin:
+    container_name: maquina-giro-pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - '15432:80'
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"

@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Api Máquina de Giro FPT",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CristianosLeite/maquina-giro-fpt.git"
+  },
+  "keywords": [
+    "API",
+    "FPT",
+    "maquina-giro-fpt"
+  ],
+  "author": "Cristiano Leite",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/CristianosLeite/maquina-giro-fpt/issues"
+  },
+  "homepage": "https://github.com/CristianosLeite/maquina-giro-fpt#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "pg": "^8.13.1",
+    "sequelize": "^6.37.5"
+  }
+}
