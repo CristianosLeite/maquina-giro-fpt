@@ -1,5 +1,5 @@
 services:
-  app1:
+  backend:
     container_name: maquina-giro-api
     restart: always
     build:
@@ -14,7 +14,7 @@ services:
     depends_on:
       - node-red
 
-  app2:
+  frontend:
     container_name: maquina-giro-app
     restart: always
     build:
@@ -54,5 +54,3 @@ services:
 networks:
   default:
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
