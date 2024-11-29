@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Server: HttpServer } = require("http");
 const { connect, createTables } = require("./database/database");
+const { OperationController } = require("./controllers/operation.controller");
 
 // The Express app is exported so that it can be used by serverless Functions.
 function app() {
@@ -23,6 +24,10 @@ function app() {
     // Create tables after successful connection
     createTables();
   });
+
+  // Handle operation
+  const operationController = new OperationController();
+  server.use("/api/operations", operationController.getRouter());
 
   return { app: server };
 }
