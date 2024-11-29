@@ -133,16 +133,40 @@ class OperationController {
    * @param {*} res
    * @returns { Operation[] }
    */
-  retrieveByEngineModelNum(req, res) {
-    const engineModelNum = req.query["recipe"];
+  retrieveByRecipe(req, res) {
+    const recipeCode = req.query["recipe"];
 
-    if (!engineModelNum) res.status(400).send("Missing recipe");
+    if (!recipeCode) res.status(400).send("Missing recipe");
 
-    Operation.findAll({ where: { engine_model_num: engineModelNum } }).then(
+    Operation.findAll({ where: { recipe: recipeCode } }).then(
       (operations) => {
         res.json(operations);
       }
     );
+  }
+
+  /**
+   * Retorna a operação por intervalo de datas
+   * @param {*} req 
+   * @param {*} res 
+   * @returns { Operation[] }
+   * @example /api/operation/date_interval?from=2021-01-01&to=2021-01-31
+   */
+  retrieveByDateInterval(req, res) {
+    const from = req.query["from"];
+    const to = req.query["to"];
+
+    if (!from || !to) res.status(400).send("Missing date interval");
+
+    Operation.findAll({
+      where: {
+        createdAt: {
+          [Op.between]: [from, to],
+        },
+      },
+    }).then((operations) => {
+      res.json(operations);
+    });
   }
 
   /**
