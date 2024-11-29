@@ -29,7 +29,7 @@ Operation.init(
       type: DataTypes.STRING,
     },
     // Receita
-    engine_model_num: {
+    recipe: {
       type: DataTypes.STRING,
       allowNull: false,
     },
