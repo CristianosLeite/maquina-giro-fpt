@@ -26,7 +26,7 @@ Operation.init(
     },
     // Quantidade de torques
     qty_torque: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     // Receita
     recipe: {

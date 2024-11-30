@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const Operation = require("../models/operation.model.js");
 
+/**
+ * Controller para operações
+ */
 class OperationController {
   constructor() {
     this.router = Router(); // Cria um objeto de roteamento
@@ -9,6 +12,9 @@ class OperationController {
     this.router.get("/one", this.retrieveById.bind(this));
     this.router.get("/partnumber", this.retrieveByPartnumber.bind(this));
     this.router.get("/reg_num", this.retrieveByRegNum.bind(this));
+    this.router.get("/status", this.retrieveByStatus.bind(this));
+    this.router.get("/recipe", this.retrieveByRecipe.bind(this));
+    this.router.get("/date_interval", this.retrieveByDateInterval.bind(this));
     this.router.put("/update", this.update.bind(this));
     this.router.delete("/delete", this.delete.bind(this));
   }

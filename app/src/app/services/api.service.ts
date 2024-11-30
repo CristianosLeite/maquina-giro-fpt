@@ -1,36 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Operation } from '../components/table/table.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  operationsRoute = 'http://beckend:4000/api/operations';
+  operationsRoute = 'http://192.168.0.17:4000/api/operations';
   constructor(
     private http: HttpClient
   ) { }
 
-  getAllOperations() {
-    return this.http.get(this.operationsRoute);
+  getAllOperations(): Observable<Operation[]> {
+    return this.http.get<Operation[]>(this.operationsRoute + '/all');
   }
 
-  getOperationById(id: string) {
-    return this.http.get(`${this.operationsRoute}?operation_id=${id}`);
+  getOperationById(id: string): Observable<Operation> {
+    return this.http.get<Operation>(`${this.operationsRoute}/one?operation_id=${id}`);
   }
 
-  getOperationByPartnumber(partnumber: string) {
-    return this.http.get(`${this.operationsRoute}?partnumber=${partnumber}`);
+  getOperationsByPartnumber(partnumber: string): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.operationsRoute}/partnumber?partnumber=${partnumber}`);
   }
 
-  getOperationByRegNum(regNum: string) {
-    return this.http.get(`${this.operationsRoute}?reg_num=${regNum}`);
+  getOperationsByRegNum(regNum: string): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.operationsRoute}/reg_num?reg_num=${regNum}`);
   }
 
-  getOperationByStatus(status: string) {
-    return this.http.get(`${this.operationsRoute}?status=${status}`);
+  getOperationsByStatus(status: string): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.operationsRoute}/status?status=${status}`);
   }
 
-  getOperationByDateInterval(from: string, to: string) {
-    return this.http.get(`${this.operationsRoute}?from=${from}&to=${to}`);
+  getOperationsByRecipe(recipe: string): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.operationsRoute}/recipe?recipe=${recipe}`);
+  }
+
+  getOperationsByDateInterval(from: string, to: string): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.operationsRoute}/date_interval?from=${from}&to=${to}`);
   }
 }
