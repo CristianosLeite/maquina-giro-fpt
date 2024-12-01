@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../services/api.service';
+import { DatePipe } from '@angular/common';
 
 export interface Operation {
   operation_id: number;
@@ -16,7 +17,7 @@ export interface Operation {
 
 @Component({
   selector: 'app-table',
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule, DatePipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -30,7 +31,7 @@ export class TableComponent implements AfterViewInit {
     'status_ok',
     'qty_torque',
     'recipe',
-    'createdat'
+    'createdAt'
   ];
 
   constructor(
