@@ -1,10 +1,3 @@
-networks:
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.0.0/24
-
 services:
   backend:
     container_name: maquina-giro-api
@@ -16,9 +9,7 @@ services:
       - '4000:4000'
     env_file:
       - .env
-    networks:
-      default:
-        ipv4_address: 192.168.0.17
+    network_mode: host
     depends_on:
       - node-red
 
@@ -32,8 +23,7 @@ services:
       - '80:80'
     env_file:
       - .env
-    networks:
-      - default
+    network_mode: host
     depends_on:
       - backend
 
@@ -45,20 +35,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - '1880:1880'
-    networks:
-      - default
+    network_mode: host
     volumes:
       - /home/conecsa/node_red_data:/data
     user: 1000:1000
-
-  pgadmin:
-    container_name: maquina-giro-pgadmin
-    restart: always
-    image: dpage/pgadmin4:latest
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-    ports:
-      - '15432:80'
-    networks:
-      - default
