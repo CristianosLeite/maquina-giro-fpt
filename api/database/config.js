@@ -2,6 +2,7 @@ const { Sequelize } = require("sequelize");
 
 const dbConfig = {
   host: process.env["DATABASE_HOST"] || "localhost",
+  port: process.env["DATABASE_PORT"] || 5432,
   user: process.env["DATABASE_USERNAME"] || "postgres",
   password: process.env["DATABASE_PASSWORD"] || "postgres",
   db: process.env["DATABASE_NAME"] || "postgres",
@@ -16,6 +17,7 @@ const dbConfig = {
 
 const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
   host: dbConfig.host,
+  port: dbConfig.port,
   dialect: dbConfig.dialect,
   pool: {
     max: dbConfig.pool.max,

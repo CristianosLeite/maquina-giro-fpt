@@ -29,14 +29,17 @@ services:
       context: ./app/
       dockerfile: Dockerfile
     ports:
-      - '4200:4200'
+      - '80:80'
     env_file:
       - .env
     networks:
       - default
+    depends_on:
+      - backend
 
   node-red:
     container_name: maquina-giro-node-red
+    restart: always
     build:
       context: ./node-red/
       dockerfile: Dockerfile
@@ -46,10 +49,11 @@ services:
       - default
     volumes:
       - /home/conecsa/node_red_data:/data
-    user: root
+    user: 1000:1000
 
   pgadmin:
     container_name: maquina-giro-pgadmin
+    restart: always
     image: dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}

@@ -1,15 +1,12 @@
-FROM node:23-alpine
-
+FROM node:23-alpine AS build
 WORKDIR /usr/src/app
-
-COPY package*.json ./
-
+COPY package.json package-lock.json ./
 RUN npm install
+COPY . .
+RUN npm run build --prod
 
-COPY . /usr/src/app
-
-RUN npm install -g @angular/cli
-
-RUN npm install
-
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/src/app/dist/maquina-giro-fpt/browser /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
