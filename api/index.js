@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { Server: HttpServer } = require("http");
 const { connect, createTables } = require("./database/database");
 const { OperationController } = require("./controllers/operation.controller");
+const { plcConnect, listenAndProcess } = require("./services/snap7-service");
 
 // The Express app is exported so that it can be used by serverless Functions.
 function app() {
@@ -25,6 +26,9 @@ function app() {
     createTables();
   });
 
+  // Connect to plc
+  plcConnect('192.168.0.1');
+
   // Handle operation
   const operationController = new OperationController();
   server.use("/api/operations", operationController.getRouter());
@@ -43,6 +47,9 @@ function run() {
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
+
+    // Start listening and processing PLC data
+    listenAndProcess();
 }
 
 run();

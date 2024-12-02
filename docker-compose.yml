@@ -10,8 +10,6 @@ services:
     env_file:
       - .env
     network_mode: host
-    depends_on:
-      - node-red
 
   frontend:
     container_name: maquina-giro-app
@@ -26,16 +24,3 @@ services:
     network_mode: host
     depends_on:
       - backend
-
-  node-red:
-    container_name: maquina-giro-node-red
-    restart: always
-    build:
-      context: ./node-red/
-      dockerfile: Dockerfile
-    ports:
-      - '1880:1880'
-    network_mode: host
-    volumes:
-      - /home/conecsa/node_red_data:/data
-    user: 1000:1000
