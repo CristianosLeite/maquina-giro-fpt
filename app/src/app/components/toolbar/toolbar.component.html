@@ -1,1 +1,39 @@
-<p>toolbar works!</p>
+<div class="flex justify-between w-full my-2 space-x-2">
+  <mat-form-field appearance="fill" class="mt-5">
+    <mat-label>Desenho</mat-label>
+    <input matInput placeholder="Filtrar desenho">
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="mt-5">
+    <mat-label>Matrícula</mat-label>
+    <input matInput placeholder="Filtrar matrícula">
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="mt-5">
+    <mat-label>Receita</mat-label>
+    <input matInput placeholder="Filtrar receita">
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="mt-5">
+    <mat-label>Status</mat-label>
+    <mat-select>
+      <mat-option value="ok">OK</mat-option>
+      <mat-option value="nok">NOK</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="mt-5">
+    <mat-label>Data Início</mat-label>
+    <input matInput [matDatepicker]="startPicker">
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="mt-5">
+    <mat-label>Data Fim</mat-label>
+    <input matInput [matDatepicker]="endPicker">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+  <button mat-icon-button aria-label="Pesquisar">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Download">
+    <mat-icon>download</mat-icon>
+  </button>
+</div>

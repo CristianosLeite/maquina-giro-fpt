@@ -1,27 +1,33 @@
-<mat-toolbar class="justify-between items-center fixed">
-  <button class="mdc-icon-button material-icons" (click)="drawer.toggle()">
-    <div class="mdc-icon-button__ripple"></div>
-    <i class="material-icons">menu</i>
-  </button>
-  <div class="flex w-full justify-center">
-    <span class="title">
-      RELATÓRIO MÁQUINA DE GIRO FPT
-    </span>
-  </div>
-</mat-toolbar>
+<main class="h-full flex-col">
 
-<mat-drawer-container autosize class="mt-20 fixed">
-  <mat-drawer #drawer class="sidenav p-6 flex justify-center" mode="side">
-    <p>Menu</p>
+  <mat-toolbar class="justify-between items-center">
+    <button class="mdc-icon-button material-icons" (click)="drawer.toggle()">
+      <div class="mdc-icon-button__ripple"></div>
+      <i class="material-icons">menu</i>
+    </button>
+    <div class="flex w-full justify-center">
+      <span class="title">
+        RELATÓRIO MÁQUINA DE GIRO FPT
+      </span>
+    </div>
+  </mat-toolbar>
 
-    <!--Operações-->
-    <a class="option flex items-center" mat-raised-button>
-      <i class="material-icons option-icon mx-1">history</i>
-      Operações
-    </a>
+  <app-toolbar></app-toolbar>
 
-  </mat-drawer>
-  <div class="child-container">
-    <app-table></app-table>
-  </div>
-</mat-drawer-container>
+  <mat-drawer-container autosize class="fixed">
+    <mat-drawer #drawer class="sidenav p-6 flex justify-center" mode="side">
+      <p>Menu</p>
+
+      <!--Operações-->
+      <a class="option flex items-center" mat-raised-button>
+        <i class="material-icons option-icon mx-1">history</i>
+        Operações
+      </a>
+
+    </mat-drawer>
+    <div class="child-container">
+      <app-table></app-table>
+    </div>
+  </mat-drawer-container>
+
+</main>
