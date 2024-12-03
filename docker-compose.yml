@@ -9,7 +9,8 @@ services:
       - '4000:4000'
     env_file:
       - .env
-    network_mode: host
+    networks:
+      - app-network
 
   frontend:
     container_name: maquina-giro-app
@@ -21,6 +22,11 @@ services:
       - '80:80'
     env_file:
       - .env
-    network_mode: host
+    networks:
+      - app-network
     depends_on:
       - backend
+
+networks:
+  app-network:
+    driver: bridge
