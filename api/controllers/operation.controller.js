@@ -171,6 +171,7 @@ class OperationController {
           [Op.between]: [from, to],
         },
       },
+      order: [["createdAt", "DESC"]],
     }).then((operations) => {
       res.json(operations);
     });
