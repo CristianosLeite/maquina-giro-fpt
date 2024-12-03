@@ -22,8 +22,7 @@ export interface Operation {
   styleUrl: './table.component.scss'
 })
 export class TableComponent implements AfterViewInit {
-  ELEMENT_DATA: Operation[] = [];
-  dataSource = new MatTableDataSource<Operation>(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Operation>([]);
   displayedColumns: string[] = [
     'operation_id',
     'reg_num',
@@ -34,16 +33,16 @@ export class TableComponent implements AfterViewInit {
     'createdAt'
   ];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private apiService: ApiService
   ) {
-    this.apiService.getAllOperations().subscribe((data: Operation[]) => {
-      this.ELEMENT_DATA = data;
-      this.dataSource = new MatTableDataSource<Operation>(this.ELEMENT_DATA);
-    });
+      this.apiService.data.subscribe(data => {
+        this.dataSource = new MatTableDataSource<Operation>(data);
+        this.dataSource.paginator = this.paginator;
+      });
   }
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

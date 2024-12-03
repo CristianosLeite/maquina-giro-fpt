@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Operation = require("../models/operation.model.js");
+const { Op } = require("sequelize");
 
 /**
  * Controller para operações

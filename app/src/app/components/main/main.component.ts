@@ -11,7 +11,7 @@ import { ToolbarComponent } from "../toolbar/toolbar.component";
     MatToolbarModule,
     MatSidenavModule,
     ToolbarComponent
-],
+  ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })

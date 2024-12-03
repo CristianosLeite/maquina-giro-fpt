@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Operation } from '../components/table/table.component';
@@ -8,12 +8,18 @@ import { Operation } from '../components/table/table.component';
 })
 export class ApiService {
   operationsRoute = 'http://192.168.0.17:4000/api/operations';
+  @Output() data = new EventEmitter<Operation[]>();
+
   constructor(
     private http: HttpClient
   ) { }
 
   getAllOperations(): Observable<Operation[]> {
-    return this.http.get<Operation[]>(this.operationsRoute + '/all');
+    const data = this.http.get<Operation[]>(this.operationsRoute + '/all');
+    data.subscribe(data => {
+      this.data.emit(data);
+    });
+    return data;
   }
 
   getOperationById(id: string): Observable<Operation> {
@@ -21,19 +27,35 @@ export class ApiService {
   }
 
   getOperationsByPartnumber(partnumber: string): Observable<Operation[]> {
-    return this.http.get<Operation[]>(`${this.operationsRoute}/partnumber?partnumber=${partnumber}`);
+    const data = this.http.get<Operation[]>(`${this.operationsRoute}/partnumber?partnumber=${partnumber}`);
+    data.subscribe(data => {
+      this.data.emit(data);
+    });
+    return data;
   }
 
   getOperationsByRegNum(regNum: string): Observable<Operation[]> {
-    return this.http.get<Operation[]>(`${this.operationsRoute}/reg_num?reg_num=${regNum}`);
+    const data = this.http.get<Operation[]>(`${this.operationsRoute}/reg_num?reg_num=${regNum}`);
+    data.subscribe(data => {
+      this.data.emit(data);
+    });
+    return data;
   }
 
   getOperationsByStatus(status: string): Observable<Operation[]> {
-    return this.http.get<Operation[]>(`${this.operationsRoute}/status?status=${status}`);
+    const data = this.http.get<Operation[]>(`${this.operationsRoute}/status?status=${status}`);
+    data.subscribe(data => {
+      this.data.emit(data);
+    });
+    return data;
   }
 
   getOperationsByRecipe(recipe: string): Observable<Operation[]> {
-    return this.http.get<Operation[]>(`${this.operationsRoute}/recipe?recipe=${recipe}`);
+    const data = this.http.get<Operation[]>(`${this.operationsRoute}/recipe?recipe=${recipe}`);
+    data.subscribe(data => {
+      this.data.emit(data);
+    });
+    return data;
   }
 
   getOperationsByDateInterval(from: string, to: string): Observable<Operation[]> {
